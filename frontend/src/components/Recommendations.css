@@ -1,0 +1,94 @@
+.recommendations-container {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    /* Match profile-card likely style if invisible */
+    /* If profile-card has class 'card', likely defined in global css. I'll add 'card' class in usage or just style here. */
+}
+
+.recommendations-container h3 {
+    margin-bottom: 1.2rem;
+    color: #333;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.8rem;
+}
+
+.recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1.2rem;
+}
+
+.recommendation-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+}
+
+.recommendation-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: #e0e0e0;
+}
+
+.book-cover-placeholder {
+    height: 140px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    /* Softer gradient */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.book-title {
+    font-size: 0.95rem;
+    margin: 0 0 0.4rem 0;
+    font-weight: 600;
+    color: #2c3e50;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-author {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    margin: 0 0 0.8rem 0;
+}
+
+.book-category {
+    margin-top: auto;
+    align-self: flex-start;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    background: #f0f2f5;
+    color: #636e72;
+    border-radius: 4px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
