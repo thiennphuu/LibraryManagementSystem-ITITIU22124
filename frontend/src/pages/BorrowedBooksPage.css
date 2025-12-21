@@ -1,0 +1,108 @@
+.borrowed-books-page .borrow-section {
+  margin-bottom: 40px;
+}
+
+.borrow-section h2 {
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  color: #333;
+}
+
+.borrows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.borrow-card {
+  display: grid;
+  grid-template-columns: 1fr 250px auto;
+  gap: 24px;
+  align-items: center;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #28a745;
+}
+
+.borrow-card.overdue {
+  border-left-color: #dc3545;
+  background: #fff8f8;
+}
+
+.borrow-book-info h3 {
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.borrow-book-info .book-author {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.borrow-dates {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.date-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.date-value {
+  font-weight: 500;
+  color: #333;
+}
+
+.date-value.overdue-text {
+  color: #dc3545;
+}
+
+.date-value small {
+  font-weight: normal;
+  color: #666;
+}
+
+.borrow-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.borrow-actions .btn {
+  white-space: nowrap;
+}
+
+/* History Section */
+.history-section {
+  padding-top: 30px;
+  border-top: 1px solid #eee;
+}
+
+@media (max-width: 900px) {
+  .borrow-card {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .borrow-dates {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .borrow-actions {
+    flex-direction: row;
+  }
+}

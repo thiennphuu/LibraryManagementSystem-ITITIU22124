@@ -1,0 +1,19 @@
+.btn-sm {
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+.admin-link {
+  color: #dc3545 !important;
+  font-weight: 600;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.user-menu {
+  position: relative;
+}

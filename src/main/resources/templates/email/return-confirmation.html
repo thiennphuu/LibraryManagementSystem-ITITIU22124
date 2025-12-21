@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Returned</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f5f5f5;">
+    <table role="presentation" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 40px 0;">
+                <table role="presentation" style="width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <!-- Header -->
+                    <tr>
+                        <td th:style="${hadFine} ? 'background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%); padding: 30px 40px; border-radius: 8px 8px 0 0;' : 'background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%); padding: 30px 40px; border-radius: 8px 8px 0 0;'">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 24px;" th:text="${hadFine} ? '📕 Book Returned (Fine Applied)' : '📕 Book Returned Successfully'">Book Returned</h1>
+                        </td>
+                    </tr>
+                    
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px;">
+                            <p style="margin: 0 0 20px; color: #333; font-size: 16px;">
+                                Hi <span th:text="${userName}" style="font-weight: 600;">User</span>,
+                            </p>
+                            
+                            <p style="margin: 0 0 20px; color: #333; font-size: 16px;">
+                                Your book has been successfully returned. Thank you for using our library!
+                            </p>
+                            
+                            <!-- Book Card -->
+                            <table role="presentation" style="width: 100%; background-color: #f5f5f5; border-radius: 8px; margin: 20px 0;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <p style="margin: 0 0 8px; color: #333; font-weight: 600; font-size: 18px;" th:text="${bookTitle}">Book Title</p>
+                                        <p style="margin: 0 0 15px; color: #666; font-size: 14px;">by <span th:text="${bookAuthor}">Author Name</span></p>
+                                        
+                                        <table role="presentation" style="width: 100%;">
+                                            <tr>
+                                                <td style="padding: 10px 0; border-top: 1px solid #e0e0e0;">
+                                                    <span style="color: #666; font-size: 14px;">Status:</span>
+                                                    <span style="color: #4caf50; font-weight: 700; float: right;">✓ Returned</span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                            
+                            <!-- Fine Warning (if applicable) -->
+                            <div th:if="${hadFine}">
+                                <table role="presentation" style="width: 100%; background-color: #fff3e0; border-radius: 8px; margin: 20px 0; border-left: 4px solid #ff9800;">
+                                    <tr>
+                                        <td style="padding: 20px;">
+                                            <p style="margin: 0 0 10px; color: #e65100; font-weight: 600; font-size: 16px;">
+                                                💰 Late Return Fine
+                                            </p>
+                                            <p style="margin: 0; color: #666; font-size: 14px;">
+                                                The book was returned after the due date. A fine has been added to your account.
+                                            </p>
+                                            <table role="presentation" style="width: 100%; margin-top: 15px;">
+                                                <tr>
+                                                    <td style="padding: 10px 0; border-top: 1px solid #ffe0b2;">
+                                                        <span style="color: #666; font-size: 14px;">Fine Amount:</span>
+                                                        <span style="color: #f44336; font-weight: 700; font-size: 18px; float: right;" th:text="'$' + ${fineAmount}">$5.00</span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <p style="margin: 15px 0 0; color: #666; font-size: 13px;">
+                                                You can pay your fine through the Fines section on our website.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <!-- Success Message (if no fine) -->
+                            <div th:unless="${hadFine}">
+                                <table role="presentation" style="width: 100%; background-color: #e8f5e9; border-radius: 8px; margin: 20px 0;">
+                                    <tr>
+                                        <td style="padding: 15px 20px;">
+                                            <p style="margin: 0; color: #2e7d32; font-size: 14px;">
+                                                ✨ <strong>Great job!</strong> You returned the book on time. No fines were applied.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <p style="margin: 20px 0; color: #333; font-size: 16px;">
+                                Looking for your next read? Browse our collection for more books!
+                            </p>
+                            
+                            <!-- CTA Button -->
+                            <table role="presentation" style="width: 100%; margin: 30px 0;">
+                                <tr>
+                                    <td style="text-align: center;">
+                                        <a href="#" style="display: inline-block; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 25px; font-weight: 600; font-size: 16px;">Browse Books</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #f8f9fa; padding: 20px 40px; border-radius: 0 0 8px 8px; border-top: 1px solid #e0e0e0;">
+                            <p style="margin: 0; color: #666; font-size: 12px; text-align: center;">
+                                This is an automated message from the Library Management System.<br>
+                                Please do not reply to this email.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
