@@ -216,30 +216,33 @@ const AdminDashboardPage = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {books.map((book) => (
-                            <tr key={book.id}>
-                              <td>{book.title}</td>
-                              <td>{book.author}</td>
-                              <td>{book.category}</td>
-                              <td>{book.availableCopies} / {book.totalCopies}</td>
-                              <td>
-                                <div className="action-buttons">
-                                  <button
-                                    onClick={() => handleEditBook(book.id)}
-                                    className="btn btn-sm btn-secondary"
-                                  >
-                                    ✏️
-                                  </button>
-                                  <button
-                                    onClick={() => handleDeleteBook(book.id)}
-                                    className="btn btn-sm btn-danger"
-                                  >
-                                    🗑️
-                                  </button>
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
+                          {books.map((book) => {
+                            console.log('Book row:', book);
+                            return (
+                              <tr key={book.id}>
+                                <td>{book.title}</td>
+                                <td>{book.author}</td>
+                                <td>{book.category}</td>
+                                <td>{book.copiesAvailable} / {book.copiesTotal}</td>
+                                <td>
+                                  <div className="action-buttons">
+                                    <button
+                                      onClick={() => handleEditBook(book.id)}
+                                      className="btn btn-sm btn-secondary"
+                                    >
+                                      ✏️
+                                    </button>
+                                    <button
+                                      onClick={() => handleDeleteBook(book.id)}
+                                      className="btn btn-sm btn-danger"
+                                    >
+                                      🗑️
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                     </>
