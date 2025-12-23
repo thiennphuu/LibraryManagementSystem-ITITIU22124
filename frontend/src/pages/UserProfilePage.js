@@ -6,16 +6,25 @@ import { toast } from 'react-toastify';
 import { formatDate } from '../utils/errorHandler';
 import './UserProfilePage.css';
 import Recommendations from '../components/Recommendations';
+import adminApi from '../services/adminApi';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const UserProfilePage = () => {
   const { user, updateUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
   const [profileData, setProfileData] = useState(null);
+  const [adminStats, setAdminStats] = useState(null);
 
   useEffect(() => {
     fetchProfile();
   }, []);
+
+  useEffect(() => {
+    if ((profileData || user)?.role === 'ADMIN') {
+      adminApi.getStats().then(setAdminStats).catch(() => setAdminStats(null));
+    }
+  }, [profileData, user]);
 
   const fetchProfile = async () => {
     try {
@@ -138,6 +147,38 @@ const UserProfilePage = () => {
                   </div>
                 )}
               </div>
+              {((profileData || user)?.role === 'ADMIN') && adminStats && (
+                <>
+                  <hr />
+                  <h4>System Statistics</h4>
+                  <ResponsiveContainer width="100%" height={250}>
+                    <PieChart>
+                      <Pie
+                        data={[
+                          { name: 'Users', value: adminStats.totalUsers },
+                          { name: 'Books', value: adminStats.totalBooks },
+                          { name: 'Borrows', value: adminStats.totalBorrows },
+                          { name: 'Reservations', value: adminStats.totalReservations },
+                          { name: 'Overdue', value: adminStats.overdueBorrows },
+                          { name: 'Active Fines', value: adminStats.activeFines },
+                        ]}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        label
+                      >
+                        {['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#ff4d4f', '#00bcd4'].map((color, idx) => (
+                          <Cell key={color} fill={color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                      <Legend />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </>
+              )}
             </div>
 
             <div className="card quick-links">

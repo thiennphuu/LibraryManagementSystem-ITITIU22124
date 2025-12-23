@@ -5,6 +5,7 @@ import bookApi from '../services/bookApi';
 import userApi from '../services/userApi';
 import borrowApi from '../services/borrowApi';
 import reservationApi from '../services/reservationApi';
+import adminApi from '../services/adminApi';
 import { formatDate } from '../utils/errorHandler';
 import { toast } from 'react-toastify';
 import './AdminDashboardPage.css';
@@ -19,6 +20,7 @@ const AdminDashboardPage = () => {
   const [borrows, setBorrows] = useState([]);
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState(null);
   
   // Book form state
   const [showBookForm, setShowBookForm] = useState(false);
@@ -27,6 +29,9 @@ const AdminDashboardPage = () => {
 
   useEffect(() => {
     fetchData();
+    if (activeTab === 'books') {
+      adminApi.getStats().then(setStats).catch(() => setStats(null));
+    }
   }, [activeTab]);
 
   useEffect(() => {
@@ -128,6 +133,16 @@ const AdminDashboardPage = () => {
         <div className="page-header">
           <h1>🔧 Admin Dashboard</h1>
           <p>Manage books, users, and library operations</p>
+          {stats && (
+            <div className="admin-stats">
+              <div className="stat-card">👥 <b>{stats.totalUsers}</b> Users</div>
+              <div className="stat-card">📚 <b>{stats.totalBooks}</b> Books</div>
+              <div className="stat-card">📖 <b>{stats.totalBorrows}</b> Borrows</div>
+              <div className="stat-card">🔔 <b>{stats.totalReservations}</b> Reservations</div>
+              <div className="stat-card">⚠️ <b>{stats.overdueBorrows}</b> Overdue</div>
+              <div className="stat-card">💸 <b>{stats.activeFines}</b> Active Fines</div>
+            </div>
+          )}
         </div>
 
         {/* Tabs */}

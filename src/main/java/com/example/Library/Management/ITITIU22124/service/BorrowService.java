@@ -1,3 +1,4 @@
+
 package com.example.Library.Management.ITITIU22124.service;
 
 import com.example.Library.Management.ITITIU22124.exception.BadRequestException;
@@ -138,5 +139,9 @@ public class BorrowService {
 
     public List<BorrowRecord> getOverdueBooks() {
         return borrowRepository.findByDueDateBeforeAndReturnDateIsNull(LocalDate.now());
+    }
+
+    public List<BorrowRecord> getAllBorrows() {
+        return borrowRepository.findAll();
     }
 }

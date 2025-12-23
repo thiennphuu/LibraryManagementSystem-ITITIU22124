@@ -1,3 +1,4 @@
+
 package com.example.Library.Management.ITITIU22124.controller;
 
 import com.example.Library.Management.ITITIU22124.model.Reservation;
@@ -50,5 +51,10 @@ public class ReservationController {
     @PutMapping("/{id}/ready")
     public ResponseEntity<Reservation> markReady(@PathVariable Long id) {
         return ResponseEntity.ok(reservationService.markReady(id));
+    }// Get all reservations (Admin)
+
+    @GetMapping
+    public List<Reservation> getAllReservations() {
+        return reservationService.getAllReservations();
     }
 }

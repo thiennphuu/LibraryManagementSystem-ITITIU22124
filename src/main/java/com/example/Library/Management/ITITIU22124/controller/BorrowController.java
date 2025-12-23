@@ -1,4 +1,6 @@
+
 package com.example.Library.Management.ITITIU22124.controller;
+// Get all borrows (Admin)
 
 import com.example.Library.Management.ITITIU22124.dto.BorrowDTO;
 import com.example.Library.Management.ITITIU22124.model.BorrowRecord;
@@ -54,5 +56,10 @@ public class BorrowController {
     @GetMapping("/overdue")
     public List<BorrowRecord> getOverdueBooks() {
         return borrowService.getOverdueBooks();
+    }
+
+    @GetMapping
+    public List<BorrowRecord> getAllBorrows() {
+        return borrowService.getAllBorrows();
     }
 }

@@ -1,3 +1,4 @@
+
 package com.example.Library.Management.ITITIU22124.service;
 
 import com.example.Library.Management.ITITIU22124.exception.NotFoundException;
@@ -101,5 +102,9 @@ public class ReservationService {
         }
 
         return savedReservation;
+    }
+
+    public List<Reservation> getAllReservations() {
+        return reservationRepository.findAll();
     }
 }
