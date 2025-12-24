@@ -7,12 +7,9 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
     author: '',
     isbn: '',
     category: '',
-    description: '',
-    totalCopies: 1,
-    availableCopies: 1,
+    copiesTotal: 1,
+    copiesAvailable: 1,
     publishedYear: '',
-    publisher: '',
-    coverImage: '',
   });
 
   const [errors, setErrors] = useState({});
@@ -39,12 +36,9 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
         author: book.author || '',
         isbn: book.isbn || '',
         category: book.category || '',
-        description: book.description || '',
-        totalCopies: book.totalCopies || 1,
-        availableCopies: book.availableCopies || 1,
+        copiesTotal: book.copiesTotal || 1,
+        copiesAvailable: book.copiesAvailable || 1,
         publishedYear: book.publishedYear || '',
-        publisher: book.publisher || '',
-        coverImage: book.coverImage || '',
       });
     }
   }, [book]);
@@ -67,9 +61,9 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
     if (!formData.author.trim()) newErrors.author = 'Author is required';
     if (!formData.isbn.trim()) newErrors.isbn = 'ISBN is required';
     if (!formData.category) newErrors.category = 'Category is required';
-    if (formData.totalCopies < 1) newErrors.totalCopies = 'Must have at least 1 copy';
-    if (formData.availableCopies > formData.totalCopies) {
-      newErrors.availableCopies = 'Cannot exceed total copies';
+    if (formData.copiesTotal < 1) newErrors.copiesTotal = 'Must have at least 1 copy';
+    if (formData.copiesAvailable > formData.copiesTotal) {
+      newErrors.copiesAvailable = 'Cannot exceed total copies';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -145,44 +139,32 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
         </div>
       </div>
 
-      <div className="form-group">
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          placeholder="Enter book description"
-          rows={4}
-        />
-      </div>
-
       <div className="form-row">
         <div className="form-group">
-          <label htmlFor="totalCopies">Total Copies *</label>
+          <label htmlFor="copiesTotal">Total Copies *</label>
           <input
             type="number"
-            id="totalCopies"
-            name="totalCopies"
-            value={formData.totalCopies}
+            id="copiesTotal"
+            name="copiesTotal"
+            value={formData.copiesTotal}
             onChange={handleChange}
             min={1}
           />
-          {errors.totalCopies && <span className="form-error">{errors.totalCopies}</span>}
+          {errors.copiesTotal && <span className="form-error">{errors.copiesTotal}</span>}
         </div>
 
         <div className="form-group">
-          <label htmlFor="availableCopies">Available Copies</label>
+          <label htmlFor="copiesAvailable">Available Copies</label>
           <input
             type="number"
-            id="availableCopies"
-            name="availableCopies"
-            value={formData.availableCopies}
+            id="copiesAvailable"
+            name="copiesAvailable"
+            value={formData.copiesAvailable}
             onChange={handleChange}
             min={0}
-            max={formData.totalCopies}
+            max={formData.copiesTotal}
           />
-          {errors.availableCopies && <span className="form-error">{errors.availableCopies}</span>}
+          {errors.copiesAvailable && <span className="form-error">{errors.copiesAvailable}</span>}
         </div>
       </div>
 
@@ -200,30 +182,6 @@ const BookForm = ({ book, onSubmit, onCancel, loading }) => {
             max={new Date().getFullYear()}
           />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="publisher">Publisher</label>
-          <input
-            type="text"
-            id="publisher"
-            name="publisher"
-            value={formData.publisher}
-            onChange={handleChange}
-            placeholder="Enter publisher name"
-          />
-        </div>
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="coverImage">Cover Image URL</label>
-        <input
-          type="url"
-          id="coverImage"
-          name="coverImage"
-          value={formData.coverImage}
-          onChange={handleChange}
-          placeholder="https://example.com/image.jpg"
-        />
       </div>
 
       <div className="form-actions">

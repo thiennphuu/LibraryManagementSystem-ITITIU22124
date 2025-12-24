@@ -25,17 +25,31 @@ public class BookService {
     }
 
     public Book addBook(Book book) {
+        if (book.getCopiesAvailable() == null) {
+            book.setCopiesAvailable(book.getCopiesTotal());
+        }
         return bookRepository.save(book);
     }
 
     public Book updateBook(Long id, Book bookDetails) {
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Book not found with id: " + id));
-        book.setTitle(bookDetails.getTitle());
-        book.setAuthor(bookDetails.getAuthor());
-        book.setIsbn(bookDetails.getIsbn());
-        book.setCopiesAvailable(bookDetails.getCopiesAvailable());
-        book.setCopiesTotal(bookDetails.getCopiesTotal());
+
+        if (bookDetails.getTitle() != null)
+            book.setTitle(bookDetails.getTitle());
+        if (bookDetails.getAuthor() != null)
+            book.setAuthor(bookDetails.getAuthor());
+        if (bookDetails.getIsbn() != null)
+            book.setIsbn(bookDetails.getIsbn());
+        if (bookDetails.getCategory() != null)
+            book.setCategory(bookDetails.getCategory());
+        if (bookDetails.getPublishedYear() != null)
+            book.setPublishedYear(bookDetails.getPublishedYear());
+        if (bookDetails.getCopiesTotal() != null)
+            book.setCopiesTotal(bookDetails.getCopiesTotal());
+        if (bookDetails.getCopiesAvailable() != null)
+            book.setCopiesAvailable(bookDetails.getCopiesAvailable());
+
         return bookRepository.save(book);
     }
 
